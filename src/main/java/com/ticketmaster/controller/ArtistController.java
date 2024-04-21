@@ -23,9 +23,8 @@ public class ArtistController {
 	    public Mono<ResponseEntity<Artist>> getArtistWithEvents(@PathVariable("artistId") String artistId) {
 	        return artistService.getArtistWithEvents(artistId)
 	                .map(artist -> ResponseEntity.ok(artist))
-	                .onErrorResume(WebClientResponseException.NotFound.class, ex -> Mono.just(ResponseEntity.notFound().build()))
-	                .onErrorResume(e -> Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()));
-	               // .defaultIfEmpty(ResponseEntity.notFound().build());
-	    }
+	                .onErrorResume(WebClientResponseException.NotFound.class, ex -> Mono.just(ResponseEntity.notFound().build()));
+	             //   .onErrorResume(Exception.class, ex -> Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)));//.body("Internal server error")));
+	    }	    
 	
 }

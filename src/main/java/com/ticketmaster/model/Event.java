@@ -13,6 +13,23 @@ public class Event {
 	private Venue venue;
 	private boolean hiddenFromSearch;
 	
+	
+	public Event(){
+		
+	}
+	
+	public Event(String id, String title, String dateStatus, String timeZone, String startDate, List<Artist> artists,
+			Venue venue, boolean hiddenFromSearch) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.dateStatus = dateStatus;
+		this.timeZone = timeZone;
+		this.startDate = startDate;
+		this.artists = artists;
+		this.venue = venue;
+		this.hiddenFromSearch = hiddenFromSearch;
+	}
 	public String getId() {
 		return id;
 	}
