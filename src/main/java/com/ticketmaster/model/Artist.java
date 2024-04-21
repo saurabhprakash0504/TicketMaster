@@ -8,7 +8,16 @@ public class Artist {
     private String imgSrc;
     private String url;
     private Integer rank;
-    private List<Event> events; // Events the artist is performing in
+  //  private List<Event> events; // Events the artist is performing in
+    private List<String> eventName;
+    
+    
+	public List<String> getEventName() {
+		return eventName;
+	}
+	public void setEventName(List<String> eventName) {
+		this.eventName = eventName;
+	}
 	public String getId() {
 		return id;
 	}
@@ -39,12 +48,12 @@ public class Artist {
 	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
-	public List<Event> getEvents() {
+/*	public List<Event> getEvents() {
 		return events;
 	}
 	public void setEvents(List<Event> events) {
 		this.events = events;
-	}
+	}*/
     
     
 	    
