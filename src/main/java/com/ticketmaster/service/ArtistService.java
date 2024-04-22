@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import com.ticketmaster.exception.ArtistNotFoundException;
 import com.ticketmaster.model.Artist;
 import com.ticketmaster.model.Event;
 
@@ -23,7 +24,7 @@ public class ArtistService {
 		Mono<Artist> artistMono = webClientBuilder.build().get()
 				.uri("https://iccp-interview-data.s3-eu-west-1.amazonaws.com/78656681/artists.json").retrieve()
 				.bodyToMono(Artist[].class).flatMapMany(Flux::fromArray)
-				.filter(artist -> artist.getId().equals(artistId)).next();
+				.filter(artist -> artist.getId().equals(artistId)).next().switchIfEmpty(Mono.error(new ArtistNotFoundException(artistId)));
 
 		Mono<List<String>> eventsFlux = webClientBuilder.build().get()
 				.uri("https://iccp-interview-data.s3-eu-west-1.amazonaws.com/78656681/events.json").retrieve()

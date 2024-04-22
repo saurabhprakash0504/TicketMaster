@@ -10,21 +10,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import com.ticketmaster.exception.ArtistNotFoundException;
 import com.ticketmaster.model.Artist;
 import com.ticketmaster.service.ArtistService;
 
 @RestController
 public class ArtistController {
 
-	   @Autowired
-	    private ArtistService artistService;
+	@Autowired
+	private ArtistService artistService;
 
-	    @GetMapping("/artists/{artistId}")
-	    public Mono<ResponseEntity<Artist>> getArtistWithEvents(@PathVariable("artistId") String artistId) {
-	        return artistService.getArtistWithEvents(artistId)
-	                .map(artist -> ResponseEntity.ok(artist))
-	                .onErrorResume(WebClientResponseException.NotFound.class, ex -> Mono.just(ResponseEntity.notFound().build()));
-	             //   .onErrorResume(Exception.class, ex -> Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)));//.body("Internal server error")));
-	    }	    
-	
+	@GetMapping("/artists/{artistId}")
+	public Mono<ResponseEntity<Artist>> getArtistWithEvents(@PathVariable("artistId") String artistId) {
+		return artistService.getArtistWithEvents(artistId).map(artist -> ResponseEntity.ok(artist))
+				.onErrorResume(ArtistNotFoundException.class, e -> Mono.just(ResponseEntity.notFound().build()));
+	}
+
 }
