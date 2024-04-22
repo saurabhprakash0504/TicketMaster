@@ -2,8 +2,8 @@
 
 # Software used
 
-Java 17
-Spring Boot 
+Java 17, 
+Spring Boot, 
 Gradle 8.7
 
 
