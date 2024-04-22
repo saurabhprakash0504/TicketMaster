@@ -1,5 +1,12 @@
 "# TicketMaster" 
 
+# Software used
+
+Java 17
+Spring Boot 
+Gradle 8.7
+
+
 # Start the application
 
 command -> gradle bootRun
